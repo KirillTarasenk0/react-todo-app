@@ -1,12 +1,12 @@
 import './App.css';
 import {initialTodos} from "./helpers/initialTodos/initialTodos";
+import CategorySelector from "./components/categorySelector/CategorySelector";
 
 function App() {
-  console.log(initialTodos);
   return (
     <>
       <div className="app__container">
-        
+        <CategorySelector/>
       </div>
     </>
   );
