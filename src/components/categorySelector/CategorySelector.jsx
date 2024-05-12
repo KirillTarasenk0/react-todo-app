@@ -3,7 +3,6 @@ import CategorySelectorForm from "./categorySelectorForm/CategorySelectorForm";
 import {useState} from "react";
 
 export default function CategorySelector() {
-  //Позволяет выбирать категорию из списка существующих категорий или добавлять новую. Использует useState для управления формой ввода новой категории.
   const [clickCategoryButton, setClickCategoryButton] = useState(false);
   const [inputCategoryValue, setInputCategoryValue] = useState([]);
   const handleCategoryInput = (value) => {
