@@ -1,12 +1,16 @@
 import './App.css';
-import {initialTodos} from "./helpers/initialTodos/initialTodos";
 import CategorySelector from "./components/categorySelector/CategorySelector";
 import AddTodoForm from "./components/addTodoForm/AddTodoForm";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function App() {
+  const [todos, setTodos] = useState([]);
   const [taskValue, setTaskValue] = useState([]);
   const [inputCategoryValue, setInputCategoryValue] = useState([]);
+  const [currentCategoryInput, setCurrentCategoryInput] = useState('');
+  const [currentTodo, setCurrentTodo] = useState([])
+  const [addTodoButtonClick, setAddTodoButtonClick] = useState(false);
+  const [id, setId] = useState(0);
   const handleTaskInput = (inputValue, callback) => {
       setTaskValue([...taskValue, inputValue]);
       callback('');
@@ -14,16 +18,36 @@ function App() {
   const handleCategoryInput = (value) => {
       setInputCategoryValue([...inputCategoryValue, value]);
   };
-  console.log(inputCategoryValue);
+  const getCurrentCategoryInput = event => {
+      setCurrentCategoryInput(event.target.value);
+  };
+  const getCurrentTodo = (input) => {
+      setCurrentTodo(input);
+      setAddTodoButtonClick(true);
+  };
+  useEffect(() => {
+      if (addTodoButtonClick) {
+          setAddTodoButtonClick(false);
+          setId(id + 1);
+          setTodos([...todos, {
+              id: id,
+              title: currentTodo,
+              category: currentCategoryInput,
+              completed: false
+          }]);
+      }
+  }, [addTodoButtonClick]);
   return (
     <>
       <div className="app__container">
         <AddTodoForm
           handleTaskInput={handleTaskInput}
+          getCurrentTodo={getCurrentTodo}
         />
         <CategorySelector
           handleCategoryInput={handleCategoryInput}
           inputCategoryValue={inputCategoryValue}
+          getCurrentCategoryInput={getCurrentCategoryInput}
         />
       </div>
     </>
