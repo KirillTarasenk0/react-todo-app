@@ -6,17 +6,25 @@ import {useState} from "react";
 
 function App() {
   const [taskValue, setTaskValue] = useState([]);
+  const [inputCategoryValue, setInputCategoryValue] = useState([]);
   const handleTaskInput = (inputValue, callback) => {
       setTaskValue([...taskValue, inputValue]);
       callback('');
   };
+  const handleCategoryInput = (value) => {
+      setInputCategoryValue([...inputCategoryValue, value]);
+  };
+  console.log(inputCategoryValue);
   return (
     <>
       <div className="app__container">
         <AddTodoForm
           handleTaskInput={handleTaskInput}
         />
-        <CategorySelector/>
+        <CategorySelector
+          handleCategoryInput={handleCategoryInput}
+          inputCategoryValue={inputCategoryValue}
+        />
       </div>
     </>
   );
