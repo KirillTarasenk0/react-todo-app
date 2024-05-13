@@ -1,7 +1,9 @@
 import './App.css';
 import CategorySelector from "./components/categorySelector/CategorySelector";
 import AddTodoForm from "./components/addTodoForm/AddTodoForm";
+import TodoList from "./components/todoList/TodoList";
 import {useEffect, useState} from "react";
+import TodoItem from "./components/todoItem/TodoItem";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -49,6 +51,11 @@ function App() {
           inputCategoryValue={inputCategoryValue}
           getCurrentCategoryInput={getCurrentCategoryInput}
         />
+          {todos &&
+              <TodoList
+                  todos={todos}
+              />
+          }
       </div>
     </>
   );
