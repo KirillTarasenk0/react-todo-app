@@ -2,9 +2,7 @@ import './TodoItem.css';
 import TaskStatusForm from "./taskStatusForm/TaskStatusForm";
 import {useState} from "react";
 
-export default function TodoItem({id, title, category, completed, changingNewTaskStatus, getCurrentItemId}) {
-    //- Отображает отдельную задачу с кнопками для изменения статуса выполнения и удаления задачи.
-    //- Использует useState для управления состоянием задачи (выполнено/не выполнено).
+export default function TodoItem({id, title, category, completed, changingNewTaskStatus, getCurrentItemId, getDeleteItemId}) {
     const [clickStatusButton, setClickStatusButton] = useState(false);
     return (
       <>
@@ -27,7 +25,7 @@ export default function TodoItem({id, title, category, completed, changingNewTas
                     }
                 </div>
                 <div>
-                    <button>Удалить задачу</button>
+                    <button onClick={() => getDeleteItemId(id)}>Удалить задачу</button>
                 </div>
             </div>
         </div>

@@ -53,6 +53,8 @@ function App() {
           {todos &&
               <TodoList
                   todos={todos}
+                  setTodos={setTodos}
+                  id={id}
               />
           }
       </div>
