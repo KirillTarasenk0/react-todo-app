@@ -2,7 +2,7 @@ import './TodoList.css';
 import TodoItem from "../todoItem/TodoItem";
 import {useState, useEffect} from "react";
 
-export default function TodoList({todos, setTodos, id}) {
+export default function TodoList({todos, setTodos}) {
     //- Отображает задачи, отфильтрованные по выбранной категории.
     //- Использует useMemo для оптимизации процесса фильтрации задач по категории.
     const [taskStatus, setTaskStatus] = useState('');
@@ -29,6 +29,11 @@ export default function TodoList({todos, setTodos, id}) {
     }, [deleteItemId]);
     return (
       <>
+        <div>
+            <div>
+                <button>Отфильтровать задачи</button>
+            </div>
+        </div>
         <div>
             {todos && todos.map(item => {
                 if (item.id === currentItemId) {

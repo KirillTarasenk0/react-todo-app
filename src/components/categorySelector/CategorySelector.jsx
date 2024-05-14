@@ -1,5 +1,6 @@
 import './CategorySelector.css';
 import CategorySelectorForm from "./categorySelectorForm/CategorySelectorForm";
+import CategoryOptionMenu from "../commonComponents/categoryOptionMenu/CategoryOptionMenu";
 import {useState} from "react";
 
 export default function CategorySelector({handleCategoryInput, inputCategoryValue, getCurrentCategoryInput}) {
@@ -8,11 +9,10 @@ export default function CategorySelector({handleCategoryInput, inputCategoryValu
     <>
       <div className="category__selector-container">
           <div>
-              <select name="" id="" onChange={getCurrentCategoryInput}>
-                  {inputCategoryValue && inputCategoryValue.map((item, index) => {
-                      return <option key={index}>{item}</option>
-                  })}
-              </select>
+              <CategoryOptionMenu
+                  inputCategoryValue={inputCategoryValue}
+                  getCurrentCategoryInput={getCurrentCategoryInput}
+              />
           </div>
           <div>
               <button onClick={() => setClickCategoryButton(!clickCategoryButton)}>
