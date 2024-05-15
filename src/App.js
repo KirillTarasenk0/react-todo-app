@@ -55,6 +55,9 @@ function App() {
                   todos={todos}
                   setTodos={setTodos}
                   id={id}
+                  inputCategoryValue={inputCategoryValue}
+                  getCurrentCategoryInput={getCurrentCategoryInput}
+                  currentCategoryInput={currentCategoryInput}
               />
           }
       </div>
