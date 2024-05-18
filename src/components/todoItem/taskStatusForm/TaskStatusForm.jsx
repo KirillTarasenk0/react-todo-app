@@ -1,7 +1,7 @@
 import './TaskStatusForm.css';
 import {useState} from "react";
 
-export default function TaskStatusForm({id, changingNewTaskStatus, getCurrentItemId}) {
+export default function TaskStatusForm({id, changingNewTaskStatus, getCurrentItemId, setTaskStatus}) {
     const [newTaskStatus, setNewTaskStatus] = useState('');
     const handleNewTaskStatusInput = (event) => {
         setNewTaskStatus(event.target.value);
@@ -10,8 +10,9 @@ export default function TaskStatusForm({id, changingNewTaskStatus, getCurrentIte
       <>
           <input type="text" placeholder="Введите статус задачи" onInput={handleNewTaskStatusInput}/>
           <button onClick={() => {
-              changingNewTaskStatus(newTaskStatus);
+              setTaskStatus(newTaskStatus)
               getCurrentItemId(id);
+              changingNewTaskStatus();
           }}>Изменить</button>
       </>
     );

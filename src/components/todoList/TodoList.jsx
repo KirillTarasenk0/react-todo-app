@@ -10,11 +10,17 @@ export default function TodoList({todos, setTodos, inputCategoryValue, getCurren
     const [openFilterButton, setOpenFilterButton] = useState(false);
     const [filterButton, setFilterButton] = useState(false);
     const [filteredTodos, setFilteredTodos] = useState([]);
-    let filteredTodosItems = useMemo(() => todos.filter(item => item.category === currentCategoryInput),
+    let filteredTodosItems = useMemo(() =>
+            todos ? todos.filter(item => item.category === currentCategoryInput) : [],
         [todos, currentCategoryInput]
     );
-    const changingNewTaskStatus = newTaskStatusValue => {
-        setTaskStatus(newTaskStatusValue);
+    const changingNewTaskStatus = () => {
+        setTodos(todos.map(item => {
+            if (item.id === currentItemId) {
+                return {...item, completed: taskStatus};
+            }
+            return item;
+        }));
     };
     const getCurrentItemId = (id) => {
         setCurrentItemId(id);
@@ -72,6 +78,7 @@ export default function TodoList({todos, setTodos, inputCategoryValue, getCurren
                         changingNewTaskStatus={changingNewTaskStatus}
                         getCurrentItemId={getCurrentItemId}
                         getDeleteItemId={getDeleteItemId}
+                        setTaskStatus={setTaskStatus}
                     />
                 ))
                 :
@@ -85,6 +92,7 @@ export default function TodoList({todos, setTodos, inputCategoryValue, getCurren
                         changingNewTaskStatus={changingNewTaskStatus}
                         getCurrentItemId={getCurrentItemId}
                         getDeleteItemId={getDeleteItemId}
+                        setTaskStatus={setTaskStatus}
                     />
                 ))
             }

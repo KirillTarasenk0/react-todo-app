@@ -2,7 +2,7 @@ import './TodoItem.css';
 import TaskStatusForm from "./taskStatusForm/TaskStatusForm";
 import {useState} from "react";
 
-export default function TodoItem({id, title, category, completed, changingNewTaskStatus, getCurrentItemId, getDeleteItemId}) {
+export default function TodoItem({id, title, category, completed, changingNewTaskStatus, getCurrentItemId, getDeleteItemId, setTaskStatus}) {
     const [clickStatusButton, setClickStatusButton] = useState(false);
     return (
       <>
@@ -21,6 +21,7 @@ export default function TodoItem({id, title, category, completed, changingNewTas
                             id={id}
                             changingNewTaskStatus={changingNewTaskStatus}
                             getCurrentItemId={getCurrentItemId}
+                            setTaskStatus={setTaskStatus}
                         />
                     }
                 </div>
