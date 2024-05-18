@@ -1,17 +1,18 @@
 import './TodoList.css';
 import TodoItem from "../todoItem/TodoItem";
 import CategoryOptionMenu from "../commonComponents/categoryOptionMenu/CategoryOptionMenu";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useMemo} from "react";
 
 export default function TodoList({todos, setTodos, inputCategoryValue, getCurrentCategoryInput, currentCategoryInput}) {
-    //- Отображает задачи, отфильтрованные по выбранной категории.
-    //- Использует useMemo для оптимизации процесса фильтрации задач по категории.
     const [taskStatus, setTaskStatus] = useState('');
     const [currentItemId, setCurrentItemId] = useState(0);
     const [deleteItemId, setDeleteItemId] = useState(0);
     const [openFilterButton, setOpenFilterButton] = useState(false);
     const [filterButton, setFilterButton] = useState(false);
     const [filteredTodos, setFilteredTodos] = useState([]);
+    let filteredTodosItems = useMemo(() => todos.filter(item => item.category === currentCategoryInput),
+        [todos, currentCategoryInput]
+    );
     const changingNewTaskStatus = newTaskStatusValue => {
         setTaskStatus(newTaskStatusValue);
     };
@@ -29,12 +30,8 @@ export default function TodoList({todos, setTodos, inputCategoryValue, getCurren
         setTodos(newTodos);
     };
     const filterTodosByCategory = () => {
-        let filteredTodosItems = todos.filter(item => item.category === currentCategoryInput);
         setFilteredTodos(filteredTodosItems);
     };
-    console.log(todos);
-    console.log(currentCategoryInput);
-    console.log(filteredTodos);
     useEffect(() => {
         removeElement(deleteItemId);
     }, [deleteItemId]);
