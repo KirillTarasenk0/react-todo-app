@@ -32,6 +32,8 @@ export default function TodoList({todos, setTodos, inputCategoryValue, getCurren
         let filteredTodosItems = todos.filter(item => item.category === currentCategoryInput);
         setFilteredTodos(filteredTodosItems);
     };
+    console.log(todos);
+    console.log(currentCategoryInput);
     console.log(filteredTodos);
     useEffect(() => {
         removeElement(deleteItemId);

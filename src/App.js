@@ -38,6 +38,11 @@ function App() {
           }]);
       }
   }, [addTodoButtonClick]);
+  useEffect(() => {
+     if (inputCategoryValue > 0) {
+         setCurrentCategoryInput(inputCategoryValue[0]);
+     }
+  }, [inputCategoryValue]);
   return (
     <>
       <div className="app__container">
