@@ -15,12 +15,24 @@ export default function TodoList({todos, setTodos, inputCategoryValue, getCurren
         [todos, currentCategoryInput]
     );
     const changingNewTaskStatus = () => {
+        if (!todos) return;
         setTodos(todos.map(item => {
             if (item.id === currentItemId) {
                 return {...item, completed: taskStatus};
             }
             return item;
         }));
+    };
+    const changingNewTaskStatusInFiltered = () => {
+        if (!filteredTodos) return;
+        if (filteredTodos) {
+            setFilteredTodos(todos.map(item => {
+                if (item.id === currentItemId) {
+                    return {...item, completed: taskStatus};
+                }
+                return item;
+            }));
+        }
     };
     const getCurrentItemId = (id) => {
         setCurrentItemId(id);
@@ -41,6 +53,16 @@ export default function TodoList({todos, setTodos, inputCategoryValue, getCurren
     useEffect(() => {
         removeElement(deleteItemId);
     }, [deleteItemId]);
+    useEffect(() => {
+        if (taskStatus !== '') {
+            changingNewTaskStatus(todos);
+        }
+    }, [taskStatus]);
+    useEffect(() => {
+        if (taskStatus !== '') {
+            changingNewTaskStatusInFiltered(filteredTodos);
+        }
+    }, [taskStatus]);
     return (
       <>
         <div>
@@ -75,7 +97,7 @@ export default function TodoList({todos, setTodos, inputCategoryValue, getCurren
                         title={item.title}
                         category={!item.category ? 'категория не выбрана' : item.category}
                         completed={(item.completed === false) ? 'не выполнено' : item.completed}
-                        changingNewTaskStatus={changingNewTaskStatus}
+                        changingNewTaskStatus={changingNewTaskStatusInFiltered}
                         getCurrentItemId={getCurrentItemId}
                         getDeleteItemId={getDeleteItemId}
                         setTaskStatus={setTaskStatus}
