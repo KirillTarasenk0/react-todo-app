@@ -14,6 +14,7 @@ export default function TodoList({todos, setTodos, inputCategoryValue, getCurren
             todos ? todos.filter(item => item.category === currentCategoryInput) : [],
         [todos, currentCategoryInput]
     );
+    console.log(deleteItemId);
     const changingNewTaskStatus = () => {
         if (!todos) return;
         setTodos(todos.map(item => {
@@ -47,12 +48,22 @@ export default function TodoList({todos, setTodos, inputCategoryValue, getCurren
         });
         setTodos(newTodos);
     };
+    const removeFilteredElement = (elementToRemove) => {
+        let newTodos = filteredTodos.filter(item => item.id !== elementToRemove);
+        newTodos = newTodos.map((item, index) => {
+            return {...item, id: index + 1}
+        });
+        setFilteredTodos(newTodos);
+    };
     const filterTodosByCategory = () => {
         setFilteredTodos(filteredTodosItems);
     };
     useEffect(() => {
         removeElement(deleteItemId);
     }, [deleteItemId]);
+    useEffect(() => {
+        removeFilteredElement(deleteItemId)
+    }, [deleteItemId, filterButton]);
     useEffect(() => {
         if (taskStatus !== '') {
             changingNewTaskStatus(todos);
