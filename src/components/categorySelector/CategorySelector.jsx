@@ -5,6 +5,7 @@ import {useState} from "react";
 
 export default function CategorySelector({handleCategoryInput, inputCategoryValue, getCurrentCategoryInput}) {
   const [clickCategoryButton, setClickCategoryButton] = useState(false);
+
   return (
     <>
       <div className="category__selector-container">

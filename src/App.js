@@ -12,6 +12,8 @@ function App() {
   const [currentTodo, setCurrentTodo] = useState([])
   const [addTodoButtonClick, setAddTodoButtonClick] = useState(false);
   const [id, setId] = useState(1);
+  const [appLoading, setAppLoading] = useState(false);
+  const [categoryLoading, setCategoryLoading] = useState(false);
   const handleTaskInput = (inputValue, callback) => {
       setTaskValue([...taskValue, inputValue]);
       callback('');
@@ -26,6 +28,18 @@ function App() {
       setCurrentTodo(input);
       setAddTodoButtonClick(true);
   };
+  useEffect(() => {
+      setAppLoading(true);
+      setTimeout(() => {
+          setAppLoading(false);
+      }, 1000);
+  }, []);
+  useEffect(() => {
+      setCategoryLoading(true)
+      setTimeout(() => {
+          setCategoryLoading(false);
+      }, 1000);
+  }, [currentCategoryInput]);
   useEffect(() => {
       if (addTodoButtonClick) {
           setAddTodoButtonClick(false);
@@ -45,27 +59,29 @@ function App() {
   }, [inputCategoryValue]);
   return (
     <>
-      <div className="app__container">
-        <AddTodoForm
-          handleTaskInput={handleTaskInput}
-          getCurrentTodo={getCurrentTodo}
-        />
-        <CategorySelector
-          handleCategoryInput={handleCategoryInput}
-          inputCategoryValue={inputCategoryValue}
-          getCurrentCategoryInput={getCurrentCategoryInput}
-        />
-          {todos &&
-              <TodoList
-                  todos={todos}
-                  setTodos={setTodos}
-                  id={id}
-                  inputCategoryValue={inputCategoryValue}
-                  getCurrentCategoryInput={getCurrentCategoryInput}
-                  currentCategoryInput={currentCategoryInput}
-              />
-          }
-      </div>
+        {appLoading || categoryLoading ? <h1>Loading...</h1> :
+            <div className="app__container">
+                <AddTodoForm
+                    handleTaskInput={handleTaskInput}
+                    getCurrentTodo={getCurrentTodo}
+                />
+                <CategorySelector
+                    handleCategoryInput={handleCategoryInput}
+                    inputCategoryValue={inputCategoryValue}
+                    getCurrentCategoryInput={getCurrentCategoryInput}
+                />
+                {todos &&
+                    <TodoList
+                        todos={todos}
+                        setTodos={setTodos}
+                        id={id}
+                        inputCategoryValue={inputCategoryValue}
+                        getCurrentCategoryInput={getCurrentCategoryInput}
+                        currentCategoryInput={currentCategoryInput}
+                    />
+                }
+            </div>
+        }
     </>
   );
 }
