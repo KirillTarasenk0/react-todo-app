@@ -14,7 +14,6 @@ export default function TodoList({todos, setTodos, inputCategoryValue, getCurren
             todos ? todos.filter(item => item.category === currentCategoryInput) : [],
         [todos, currentCategoryInput]
     );
-    console.log(deleteItemId);
     const changingNewTaskStatus = () => {
         if (!todos) return;
         setTodos(todos.map(item => {

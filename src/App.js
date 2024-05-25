@@ -13,7 +13,6 @@ function App() {
   const [addTodoButtonClick, setAddTodoButtonClick] = useState(false);
   const [id, setId] = useState(1);
   const [appLoading, setAppLoading] = useState(false);
-  const [categoryLoading, setCategoryLoading] = useState(false);
   const handleTaskInput = (inputValue, callback) => {
       setTaskValue([...taskValue, inputValue]);
       callback('');
@@ -35,12 +34,6 @@ function App() {
       }, 1000);
   }, []);
   useEffect(() => {
-      setCategoryLoading(true)
-      setTimeout(() => {
-          setCategoryLoading(false);
-      }, 1000);
-  }, [currentCategoryInput]);
-  useEffect(() => {
       if (addTodoButtonClick) {
           setAddTodoButtonClick(false);
           setId(id + 1);
@@ -59,7 +52,7 @@ function App() {
   }, [inputCategoryValue]);
   return (
     <>
-        {appLoading || categoryLoading ? <h1>Loading...</h1> :
+        {appLoading ? <h1>Loading...</h1> :
             <div className="app__container">
                 <AddTodoForm
                     handleTaskInput={handleTaskInput}
